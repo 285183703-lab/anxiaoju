@@ -20,6 +20,9 @@ export type Collected = {
   description?: string
   reported_to_property?: boolean | null
   suggestion?: string
+  report_ready?: boolean
+  reporter_name?: string
+  reporter_phone?: string
 }
 
 export type AssistantPayload = {
@@ -28,6 +31,7 @@ export type AssistantPayload = {
   category: Category
   collected: Collected
   need_manual: boolean
+  report_ready?: boolean
 }
 
 export type ChatMessage = {
@@ -37,6 +41,7 @@ export type ChatMessage = {
   intent?: Intent
   category?: Category
   needManual?: boolean
+  reportReady?: ReportReady
 }
 
 export const SUGGESTED_QUESTIONS: string[] = [
@@ -46,3 +51,10 @@ export const SUGGESTED_QUESTIONS: string[] = [
   "物业服务太差，业主能集体换物业吗？",
   "维修资金能用来修小区门禁吗？",
 ]
+
+export type ReportReady = {
+  category: string
+  description: string
+  reporterName?: string
+  reporterPhone?: string
+}

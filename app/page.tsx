@@ -5,11 +5,18 @@ import { ChatHeader } from "@/components/chat-header"
 import { WelcomeScreen } from "@/components/welcome-screen"
 import { MessageList } from "@/components/message-list"
 import { ChatInput } from "@/components/chat-input"
+import { ReportForm } from "@/components/report-form"
 import type { AssistantPayload, ChatMessage } from "@/lib/chat-types"
 
 export default function Page() {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [pending, setPending] = useState(false)
+  const [reportReady, setReportReady] = useState<{
+    category: string
+    description: string
+    reporterName?: string
+    reporterPhone?: string
+  } | null>(null)
 
   const hasChat = messages.length > 0
 
@@ -43,15 +50,33 @@ export default function Page() {
         content: data.reply,
         intent: data.intent,
         needManual: data.need_manual,
+        reportReady: data.report_ready
+          ? {
+              category: data.category,
+              description: data.collected.description ?? "",
+              reporterName: data.collected.reporter_name,
+              reporterPhone: data.collected.reporter_phone,
+            }
+          : undefined,
       }
       setMessages((m) => [...m, aiMsg])
+
+      if (data.report_ready && data.collected.description) {
+        setReportReady({
+          category: data.category,
+          description: data.collected.description,
+          reporterName: data.collected.reporter_name,
+          reporterPhone: data.collected.reporter_phone,
+        })
+      }
     } catch {
       setMessages((m) => [
         ...m,
         {
           id: crypto.randomUUID(),
           role: "assistant",
-          content: "网络异常，请稍后再试。\n\n以上信息由 AI 生成，仅供参考。",
+          content:
+            "网络异常，请稍后再试。\n\n以上信息由 AI 生成，仅供参考。",
           intent: "irrelevant",
         },
       ])
@@ -60,24 +85,59 @@ export default function Page() {
     }
   }
 
+  function handleReportSubmit(url: string) {
+    window.location.href = url
+  }
+
+  function handleReportCancel() {
+    setReportReady(null)
+  }
+
   function reset() {
     if (pending) return
     setMessages([])
+    setReportReady(null)
+  }
+
+  function handleReportClick(msg: ChatMessage) {
+    if (msg.reportReady) {
+      setReportReady({
+        category: msg.reportReady.category,
+        description: msg.reportReady.description,
+        reporterName: msg.reportReady.reporterName,
+        reporterPhone: msg.reportReady.reporterPhone,
+      })
+    }
   }
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-md flex-col">
+    <main className="mx-auto w-full max-w-2xl min-h-dvh flex flex-col">
       <ChatHeader onReset={reset} />
 
-      <div className="flex-1 overflow-y-auto pt-2 scrollbar-hidden">
+      <div className={`flex-1 overflow-y-auto scrollbar-hidden ${hasChat ? "pt-4" : "pt-16"}`}>
         {hasChat ? (
-          <MessageList messages={messages} pending={pending} />
+          <MessageList messages={messages} pending={pending} onReportClick={handleReportClick} />
         ) : (
           <WelcomeScreen onPickQuestion={send} />
         )}
       </div>
 
-      <ChatInput onSend={send} disabled={pending} />
+      <div className={`pb-48 ${hasChat ? "" : "hidden"}`} />
+
+      {reportReady && (
+        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl z-50 pb-[max(env(safe-area-inset-bottom),12px)]">
+          <ReportForm
+            category={reportReady.category}
+            description={reportReady.description}
+            reporterName={reportReady.reporterName}
+            reporterPhone={reportReady.reporterPhone}
+            onSubmit={handleReportSubmit}
+            onCancel={handleReportCancel}
+          />
+        </div>
+      )}
+
+      <ChatInput onSend={send} disabled={pending || !!reportReady} />
     </main>
   )
 }

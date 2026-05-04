@@ -3,105 +3,137 @@
 @tailwind utilities;
 
 :root {
-  /* 安小居 主题色：蓝紫渐变背景 + 蓝色品牌色 */
-  --background: oklch(0.97 0.02 250);
-  --foreground: oklch(0.22 0.04 260);
+  font-family: "Public Sans", system-ui, sans-serif;
+  letter-spacing: -0.011em;
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.04 260);
-
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.04 260);
-
-  /* 主蓝色（吉祥物色） */
-  --primary: oklch(0.62 0.18 255);
-  --primary-foreground: oklch(1 0 0);
-
-  /* 次级浅蓝 */
-  --secondary: oklch(0.94 0.04 250);
-  --secondary-foreground: oklch(0.4 0.12 260);
-
-  --muted: oklch(0.95 0.02 250);
-  --muted-foreground: oklch(0.5 0.04 260);
-
-  --accent: oklch(0.88 0.08 240);
-  --accent-foreground: oklch(0.3 0.12 260);
-
-  --destructive: oklch(0.6 0.22 25);
-  --destructive-foreground: oklch(1 0 0);
-
-  --border: oklch(0.92 0.02 250);
-  --input: oklch(0.94 0.02 250);
-  --ring: oklch(0.62 0.18 255);
-
-  --radius: 1rem;
-
-  /* 自定义渐变端点 */
-  --grad-from: oklch(0.92 0.05 280);
-  --grad-via: oklch(0.93 0.06 250);
-  --grad-to: oklch(0.95 0.04 220);
-
-  /* AI 气泡专用浅蓝白 */
-  --bubble-ai: oklch(1 0 0);
-  --bubble-user: oklch(0.62 0.18 255);
-}
-
-.dark {
-  --background: oklch(0.18 0.04 260);
-  --foreground: oklch(0.97 0.01 250);
-  --card: oklch(0.22 0.04 260);
-  --card-foreground: oklch(0.97 0.01 250);
-  --popover: oklch(0.22 0.04 260);
-  --popover-foreground: oklch(0.97 0.01 250);
-  --primary: oklch(0.7 0.18 255);
-  --primary-foreground: oklch(0.18 0.04 260);
-  --secondary: oklch(0.28 0.04 260);
-  --secondary-foreground: oklch(0.97 0.01 250);
-  --muted: oklch(0.28 0.04 260);
-  --muted-foreground: oklch(0.7 0.02 250);
-  --accent: oklch(0.32 0.06 250);
-  --accent-foreground: oklch(0.97 0.01 250);
-  --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(0.97 0.01 250);
-  --border: oklch(0.3 0.04 260);
-  --input: oklch(0.3 0.04 260);
-  --ring: oklch(0.7 0.18 255);
+  /* Material Design 3 color tokens */
+  --color-on-surface: #1b1c1a;
+  --color-on-surface-variant: #424754;
+  --color-primary: #3d8bff;
+  --color-on-primary: #ffffff;
+  --color-secondary: #495e8a;
+  --color-on-secondary: #ffffff;
+  --color-error: #ba1a1a;
+  --color-outline: #727785;
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   html,
   body {
-    @apply text-foreground;
+    @apply text-foreground antialiased;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
   body {
-    background:
-      radial-gradient(120% 60% at 50% 0%, var(--grad-from) 0%, transparent 60%),
-      linear-gradient(180deg, var(--grad-via) 0%, var(--grad-to) 100%);
+    background-color: #faf9f5;
+    background-image:
+      radial-gradient(at 0% 0%, hsla(174, 72%, 95%, 1) 0%, transparent 50%),
+      radial-gradient(at 50% 0%, hsla(282, 39%, 93%, 1) 0%, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(50, 100%, 94%, 1) 0%, transparent 50%);
     background-attachment: fixed;
     min-height: 100dvh;
   }
 }
 
-/* 简单的入场动效 */
-@keyframes float-y {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+/* Material Symbols icon defaults */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  color: inherit;
 }
+
+/* Material Design 3 Glass Effects */
+.glass-header {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.03), 0 2px 8px -1px rgba(0, 0, 0, 0.02);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.persona-glow {
+  background: radial-gradient(circle, rgba(61, 139, 255, 0.08) 0%, transparent 70%);
+}
+
+/* Message Bubbles */
+.message-bubble-nova {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.02);
+}
+
+.message-bubble-user {
+  background: linear-gradient(135deg, #3d8bff 0%, #2170e4 100%);
+  box-shadow: 0 10px 20px -5px rgba(61, 139, 255, 0.2);
+}
+
+/* Inner glow effect */
+.inner-glow {
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+/* Hide scrollbar but keep scrolling */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Animation keyframes */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(34, 197, 94, 0.8);
+  }
+}
+
 .animate-float {
   animation: float-y 4s ease-in-out infinite;
 }
 
-@keyframes pop-in {
-  0% { opacity: 0; transform: translateY(8px) scale(0.98); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
-}
 .animate-pop-in {
   animation: pop-in 0.3s ease-out both;
 }
 
-/* 隐藏滚动条但保留可滚动 */
-.scrollbar-hidden::-webkit-scrollbar { display: none; }
-.scrollbar-hidden { scrollbar-width: none; }
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}

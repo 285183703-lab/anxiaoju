@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next"
-import { Inter, JetBrains_Mono } from "next/font/google"
+import { Public_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/react"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
-const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" })
+const publicSans = Public_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["300", "400", "500", "600", "700", "800"],
+})
 
 export const metadata: Metadata = {
   title: "安小居 - 越城区物业诉求 AI 助手",
@@ -14,7 +17,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#dfe7ff",
+  themeColor: "#faf9f5",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -27,9 +30,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="zh-CN" className={`${inter.variable} ${jetbrainsMono.variable} bg-background`}>
+    <html lang="zh-CN" className={publicSans.variable}>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="font-sans antialiased">
-        {children}
+        <div className="mx-auto max-w-2xl">
+          {children}
+        </div>
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>

@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, type FormEvent, type KeyboardEvent } from "react"
-import { ArrowUp, AudioLines } from "lucide-react"
 
 type Props = {
   onSend: (text: string) => void
@@ -27,39 +26,45 @@ export function ChatInput({ onSend, disabled }: Props) {
   }
 
   return (
-    <form
-      onSubmit={submit}
-      className="sticky bottom-0 z-30 w-full bg-gradient-to-t from-[var(--grad-to)] via-[var(--grad-to)]/90 to-transparent px-3 pb-[max(env(safe-area-inset-bottom),12px)] pt-3"
-    >
-      <div className="flex items-end gap-2">
-        <button
-          type="button"
-          aria-label="语音输入"
-          className="flex size-11 shrink-0 items-center justify-center rounded-full bg-white/70 text-foreground/70 shadow-sm backdrop-blur transition active:scale-95"
-        >
-          <AudioLines className="size-5" />
-        </button>
-
-        <div className="flex-1 rounded-3xl bg-white/85 px-4 py-2 shadow-sm backdrop-blur">
-          <textarea
-            rows={1}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            onKeyDown={onKeyDown}
-            placeholder="请输入您的物业问题…"
-            className="block max-h-32 w-full resize-none bg-transparent py-1.5 text-[15px] leading-6 text-foreground placeholder:text-foreground/40 focus:outline-none"
-          />
+    <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl z-50">
+      <div className="max-w-2xl mx-auto px-6 pb-4">
+        {/* Quick Actions */}
+        <div className="flex items-center gap-2.5 overflow-x-auto no-scrollbar pb-3">
+          <button className="whitespace-nowrap px-5 py-2.5 rounded-full glass-card bg-white/70 border-white/60 text-[13px] font-bold text-[#495e8a] flex items-center gap-2 flex-1 justify-center active:scale-95 transition-transform inner-glow">
+            <span className="material-symbols-outlined text-[18px] text-[#495e8a]">report_problem</span> 诉求上报
+          </button>
+          <button className="whitespace-nowrap px-5 py-2.5 rounded-full glass-card bg-white/70 border-white/60 text-[13px] font-bold text-[#495e8a] flex items-center gap-2 flex-1 justify-center active:scale-95 transition-transform inner-glow">
+            <span className="material-symbols-outlined text-[18px] text-[#495e8a]">manage_search</span> 诉求查询
+          </button>
+          <button className="whitespace-nowrap px-5 py-2.5 rounded-full glass-card bg-white/70 border-white/60 text-[13px] font-bold text-[#495e8a] flex items-center gap-2 flex-1 justify-center active:scale-95 transition-transform inner-glow">
+            <span className="material-symbols-outlined text-[18px] text-[#495e8a]">support_agent</span> 联系管家
+          </button>
         </div>
 
-        <button
-          type="submit"
-          disabled={disabled || !value.trim()}
-          aria-label="发送"
-          className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md shadow-primary/30 transition active:scale-95 disabled:bg-primary/40 disabled:shadow-none"
-        >
-          <ArrowUp className="size-5" />
-        </button>
+        {/* Capsule Input Area */}
+        <div className="relative mb-2">
+          <div className="glass-input rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-white/80 p-2 flex items-center inner-glow">
+            <div className="flex-1 px-4">
+              <textarea
+                rows={1}
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                onKeyDown={onKeyDown}
+                placeholder="与安小居对话..."
+                className="block max-h-32 w-full resize-none bg-transparent text-[#1b1c1a] placeholder:text-[#727785]/40 text-[16px] font-medium focus:outline-none"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={disabled || !value.trim()}
+              onClick={submit}
+              className="w-12 h-12 rounded-full bg-[#3d8bff] text-white flex items-center justify-center shadow-lg shadow-[#3d8bff]/25 hover:brightness-110 active:scale-90 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <span className="material-symbols-outlined text-[24px] text-white">arrow_upward</span>
+            </button>
+          </div>
+        </div>
       </div>
-    </form>
+    </div>
   )
 }

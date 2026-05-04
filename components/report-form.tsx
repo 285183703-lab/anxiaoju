@@ -136,10 +136,10 @@ export function ReportForm({ category, description, reporterName, reporterPhone,
   }
 
   return (
-    <div className="mx-4 rounded-[1.5rem] glass-card p-6 shadow-premium">
+    <div className="mx-4 rounded-md glass-card p-6 shadow-premium">
       <div className="flex items-center justify-between mb-5">
-        <h3 className="text-[17px] font-bold text-[#1b1c1a]">确认上报信息</h3>
-        <button onClick={onCancel} className="p-2 -mr-2 rounded-full hover:bg-white/40 text-[#424754] transition-colors">
+        <h3 className="text-[17px] font-bold text-on-surface">确认上报信息</h3>
+        <button onClick={onCancel} className="w-10 h-10 p-2 -mr-2 rounded-full hover:bg-white/40 text-[#424754] transition-colors">
           <span className="material-symbols-outlined text-[20px] text-[#424754]">close</span>
         </button>
       </div>
@@ -147,16 +147,27 @@ export function ReportForm({ category, description, reporterName, reporterPhone,
       {/* 问题类型 */}
       <div className="glass-card p-4 rounded-xl mb-4 border-[#3d8bff]/10">
         <div className="text-[11px] text-[#424754]/60 font-semibold uppercase tracking-wider mb-1">诉求类型</div>
-        <div className="text-[15px] font-bold text-[#3d8bff]">
+        <div className="text-[15px] font-bold text-primary">
           {CATEGORY_MAP[category]?.label ?? "其他综合"}
         </div>
       </div>
 
       {/* 问题描述 */}
-      <div className="bg-[#efeeea]/50 p-4 rounded-xl mb-5">
-        <div className="text-[11px] text-[#424754]/60 font-semibold uppercase tracking-wider mb-1">问题描述</div>
-        <div className="text-[14px] text-[#1b1c1a] leading-relaxed">{form.remandContent}</div>
+      <div className="mb-4">
+        <label className="flex items-center gap-2 text-[12px] text-[#424754] font-semibold mb-2">
+          <span className="material-symbols-outlined text-[16px] text-[#424754]">person</span>
+          问题描述
+        </label>
+        <textarea
+          value={form.remandContent}
+          onChange={(e) => setForm({ ...form, remandContent: e.target.value })}
+          placeholder="请输入问题描述"
+          rows={4}
+          className="w-full rounded-sm border border-white/60 bg-white/70 px-3 py-2 text-[14px] text-on-surface leading-relaxed placeholder:text-[#727785]/40 focus:border-[#3d8bff] focus:outline-none focus:ring-2 focus:ring-[#3d8bff]/20 transition-all resize-none"
+        />
+        {errors.remandContent && <p className="mt-1.5 text-[12px] text-[#ba1a1a] font-medium">{errors.remandContent}</p>}
       </div>
+
 
       {/* 联系人 */}
       <div className="mb-4">
@@ -169,7 +180,7 @@ export function ReportForm({ category, description, reporterName, reporterPhone,
           value={form.reporterName}
           onChange={(e) => setForm({ ...form, reporterName: e.target.value })}
           placeholder="请输入姓名"
-          className="w-full rounded-xl border border-white/60 bg-white/70 px-4 py-3 text-[15px] text-[#1b1c1a] placeholder:text-[#727785]/40 focus:border-[#3d8bff] focus:outline-none focus:ring-2 focus:ring-[#3d8bff]/20 transition-all"
+          className="w-full rounded-xl border border-white/60 bg-white/70 px-4 py-3 text-[15px] text-on-surface placeholder:text-[#727785]/40 focus:border-[#3d8bff] focus:outline-none focus:ring-2 focus:ring-[#3d8bff]/20 transition-all"
         />
         {errors.reporterName && <p className="mt-1.5 text-[12px] text-[#ba1a1a] font-medium">{errors.reporterName}</p>}
       </div>
@@ -186,13 +197,13 @@ export function ReportForm({ category, description, reporterName, reporterPhone,
           onChange={(e) => setForm({ ...form, reporterPhone: e.target.value })}
           placeholder="请输入手机号"
           maxLength={11}
-          className="w-full rounded-xl border border-white/60 bg-white/70 px-4 py-3 text-[15px] text-[#1b1c1a] placeholder:text-[#727785]/40 focus:border-[#3d8bff] focus:outline-none focus:ring-2 focus:ring-[#3d8bff]/20 transition-all"
+          className="w-full rounded-xl border border-white/60 bg-white/70 px-4 py-3 text-[15px] text-on-surface placeholder:text-[#727785]/40 focus:border-[#3d8bff] focus:outline-none focus:ring-2 focus:ring-[#3d8bff]/20 transition-all"
         />
         {errors.reporterPhone && <p className="mt-1.5 text-[12px] text-[#ba1a1a] font-medium">{errors.reporterPhone}</p>}
       </div>
 
       {/* 地址选择 */}
-      <div className="space-y-3 mb-5">
+      {/* <div className="space-y-3 mb-5">
         <div>
           <label className="flex items-center gap-2 text-[12px] text-[#424754] font-semibold mb-2">
             <MapPin className="size-4 text-[#424754]" />
@@ -204,7 +215,7 @@ export function ReportForm({ category, description, reporterName, reporterPhone,
               const s = streets.find((x) => x.key === e.target.value) ?? null
               setForm({ ...form, street: s, community: null, village: null })
             }}
-            className="w-full rounded-xl border border-white/60 bg-white/70 px-4 py-3 text-[15px] text-[#1b1c1a] focus:border-[#3d8bff] focus:outline-none focus:ring-2 focus:ring-[#3d8bff]/20 transition-all"
+            className="w-full rounded-xl border border-white/60 bg-white/70 px-4 py-3 text-[15px] text-on-surface focus:border-[#3d8bff] focus:outline-none focus:ring-2 focus:ring-[#3d8bff]/20 transition-all"
           >
             <option value="">请选择街道</option>
             {streets.map((s) => (
@@ -226,7 +237,7 @@ export function ReportForm({ category, description, reporterName, reporterPhone,
               setForm({ ...form, community: c, village: null })
             }}
             disabled={!form.street}
-            className="w-full rounded-xl border border-white/60 bg-white/70 px-4 py-3 text-[15px] text-[#1b1c1a] focus:border-[#3d8bff] focus:outline-none focus:ring-2 focus:ring-[#3d8bff]/20 transition-all disabled:opacity-50"
+            className="w-full rounded-xl border border-white/60 bg-white/70 px-4 py-3 text-[15px] text-on-surface focus:border-[#3d8bff] focus:outline-none focus:ring-2 focus:ring-[#3d8bff]/20 transition-all disabled:opacity-50"
           >
             <option value="">{form.street ? "请选择社区" : "请先选择街道"}</option>
             {communities.map((c) => (
@@ -248,7 +259,7 @@ export function ReportForm({ category, description, reporterName, reporterPhone,
               setForm({ ...form, village: v })
             }}
             disabled={!form.community}
-            className="w-full rounded-xl border border-white/60 bg-white/70 px-4 py-3 text-[15px] text-[#1b1c1a] focus:border-[#3d8bff] focus:outline-none focus:ring-2 focus:ring-[#3d8bff]/20 transition-all disabled:opacity-50"
+            className="w-full rounded-xl border border-white/60 bg-white/70 px-4 py-3 text-[15px] text-on-surface focus:border-[#3d8bff] focus:outline-none focus:ring-2 focus:ring-[#3d8bff]/20 transition-all disabled:opacity-50"
           >
             <option value="">{form.community ? "请选择小区" : "请先选择社区"}</option>
             {villages.map((v) => (
@@ -257,7 +268,7 @@ export function ReportForm({ category, description, reporterName, reporterPhone,
           </select>
           {errors.village && <p className="mt-1.5 text-[12px] text-[#ba1a1a] font-medium">{errors.village}</p>}
         </div>
-      </div>
+      </div> */}
 
       {/* 按钮 */}
       <div className="flex gap-3">

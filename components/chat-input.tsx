@@ -30,15 +30,13 @@ export function ChatInput({ onSend, disabled }: Props) {
       <div className="max-w-2xl mx-auto px-6 pb-4">
         {/* Quick Actions */}
         <div className="flex items-center gap-2.5 overflow-x-auto no-scrollbar pb-3">
-          <button className="whitespace-nowrap px-5 py-2.5 rounded-full glass-card bg-white/70 border-white/60 text-[13px] font-bold text-[#495e8a] flex items-center gap-2 flex-1 justify-center active:scale-95 transition-transform inner-glow">
-            <span className="material-symbols-outlined text-[18px] text-[#495e8a]">report_problem</span> 诉求上报
+          <button className="whitespace-nowrap px-5 py-2.5 rounded-full glass-card bg-white/70 border-white/60 text-[13px] font-bold  flex items-center gap-2 flex-0.33 justify-center active:scale-95 transition-transform inner-glow">
+            <span className="material-symbols-outlined text-[18px] text-on-surface">edit_square</span>诉求上报
           </button>
-          <button className="whitespace-nowrap px-5 py-2.5 rounded-full glass-card bg-white/70 border-white/60 text-[13px] font-bold text-[#495e8a] flex items-center gap-2 flex-1 justify-center active:scale-95 transition-transform inner-glow">
-            <span className="material-symbols-outlined text-[18px] text-[#495e8a]">manage_search</span> 诉求查询
+          <button className="whitespace-nowrap px-5 py-2.5 rounded-full glass-card bg-white/70 border-white/60 text-[13px] font-bold  flex items-center gap-2 flex-0.33 justify-center active:scale-95 transition-transform inner-glow">
+            <span className="material-symbols-outlined text-[18px] text-on-surface">manage_search</span>诉求查询
           </button>
-          <button className="whitespace-nowrap px-5 py-2.5 rounded-full glass-card bg-white/70 border-white/60 text-[13px] font-bold text-[#495e8a] flex items-center gap-2 flex-1 justify-center active:scale-95 transition-transform inner-glow">
-            <span className="material-symbols-outlined text-[18px] text-[#495e8a]">support_agent</span> 联系管家
-          </button>
+  
         </div>
 
         {/* Capsule Input Area */}
@@ -51,7 +49,7 @@ export function ChatInput({ onSend, disabled }: Props) {
                 onChange={(e) => setValue(e.target.value)}
                 onKeyDown={onKeyDown}
                 placeholder="与安小居对话..."
-                className="block max-h-32 w-full resize-none bg-transparent text-[#1b1c1a] placeholder:text-[#727785]/40 text-[16px] font-medium focus:outline-none"
+                className="block max-h-32 w-full resize-none bg-transparent text-on-surface placeholder:text-[#727785]/40 text-[16px] font-medium focus:outline-none"
               />
             </div>
             <button

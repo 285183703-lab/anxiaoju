@@ -114,7 +114,8 @@ export default function Page() {
     <main className="mx-auto w-full max-w-2xl min-h-dvh flex flex-col">
       <ChatHeader onReset={reset} />
 
-      <div className={`flex-1 overflow-y-auto scrollbar-hidden ${hasChat ? "pt-4" : "pt-16"}`}>
+      {/* <div className={`flex-1  scrollbar-hidden ${hasChat ? "pt-4" : "pt-16"}`}> */}
+       <div className="flex-1  scrollbar-hidden  pt-24">
         {hasChat ? (
           <MessageList messages={messages} pending={pending} onReportClick={handleReportClick} />
         ) : (
@@ -125,7 +126,7 @@ export default function Page() {
       <div className={`pb-48 ${hasChat ? "" : "hidden"}`} />
 
       {reportReady && (
-        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl z-50 pb-[max(env(safe-area-inset-bottom),12px)]">
+        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl z-[100] pb-[max(env(safe-area-inset-bottom),12px)]">
           <ReportForm
             category={reportReady.category}
             description={reportReady.description}

@@ -13,7 +13,7 @@ export function ChatHeader({ onReset }: Props) {
         <div className="flex items-center gap-4">
           <MenuSheet />
           <div className="flex flex-col">
-            <h1 className="font-bold text-[17px] leading-tight text-[#1b1c1a] tracking-tight">
+            <h1 className="font-bold text-[17px] leading-tight text-on-surface tracking-tight">
               安小居
             </h1>
             <div className="flex items-center gap-1.5 mt-0.5">

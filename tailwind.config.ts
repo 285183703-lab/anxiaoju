@@ -1,9 +1,22 @@
 import type { Config } from "tailwindcss"
 
 const config: Config = {
-  darkMode: "class",
+  darkMode: ["class"],
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Public Sans", "PingFang SC", "Microsoft YaHei", "system-ui", "sans-serif"],
+        mono: ["SF Mono", "monospace"],
+        headline: ["Public Sans"],
+        display: ["Public Sans"],
+        body: ["Public Sans"],
+        label: ["Public Sans"],
+      },
       colors: {
         // Material Design 3 Surface Colors
         "on-surface": "#1b1c1a",
@@ -91,13 +104,9 @@ const config: Config = {
         DEFAULT: "1.25rem",
         lg: "2.25rem",
         xl: "3.5rem",
+        sm: "calc(1.25rem - 8px)",
+        md: "calc(1.25rem - 4px)",
         full: "9999px",
-      },
-      fontFamily: {
-        headline: ["Public Sans"],
-        display: ["Public Sans"],
-        body: ["Public Sans"],
-        label: ["Public Sans"],
       },
       boxShadow: {
         premium: "0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 20px 40px -10px rgba(0, 0, 0, 0.02)",

@@ -26,10 +26,12 @@ export function MessageList({ messages, pending, onReportClick }: Props) {
       ))}
 
       {pending && (
-        <div className="flex items-end gap-3">
-          <Avatar role="assistant" />
-          <div className="message-bubble-nova rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
-            <Loader2 className="size-4 animate-spin text-[#3d8bff]" />
+        <div className="flex gap-3">
+          <div className="self-start shrink-0">
+            <Avatar role="assistant" />
+          </div>
+          <div className="message-bubble-nova rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm self-start">
+            <Loader2 className="size-4 animate-spin text-primary" />
           </div>
         </div>
       )}
@@ -53,22 +55,34 @@ function MessageBubble({ message, onReportClick }: { message: ChatMessage; onRep
       <div className={`flex flex-col gap-2 ${isUser ? "items-end" : "items-start"}`}>
         <div
           className={[
-            "whitespace-pre-wrap rounded-[1.5rem] px-5 py-4 text-[15px] leading-relaxed shadow-sm",
+            "whitespace-pre-wrap rounded-md px-5 py-4 text-[15px] leading-relaxed shadow-sm",
             isUser
               ? "message-bubble-user rounded-tr-none text-white"
-              : "message-bubble-nova rounded-tl-none text-[#1b1c1a]",
+              : "message-bubble-nova rounded-tl-none text-on-surface",
           ].join(" ")}
         >
           {message.content}
         </div>
         {canReport && (
-          <button
-            onClick={() => onReportClick?.(message)}
-            className="mt-2 flex items-center gap-2 rounded-full bg-[#3d8bff]/10 px-5 py-2.5 text-sm font-bold text-[#3d8bff] transition hover:bg-[#3d8bff]/20 active:scale-95"
-          >
-            <span className="material-symbols-outlined text-[18px] text-[#3d8bff]">edit_note</span>
-            填写上报信息
-          </button>
+          <div className="mt-3 glass-card p-4 flex flex-col gap-3 border-[#3d8bff]/10 shadow-premium">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#3d8bff]/20 flex items-center justify-center shrink-0">
+                <span className="material-symbols-outlined text-primary text-[20px]">construction</span>
+              </div>
+              <div>
+                <h3 className="text-[#1b1c1a] font-bold text-[15px] leading-tight">需要发起诉求吗？</h3>
+                <p className="text-[#424754]/70 text-[12px] mt-1 leading-relaxed">
+                  遇到物业问题？点击按钮快速上报
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => onReportClick?.(message)}
+              className="w-full py-3 bg-[#3d8bff] text-white rounded-xl font-bold text-sm shadow-lg shadow-[#3d8bff]/20 hover:brightness-110 active:scale-[0.98] transition-all"
+            >
+              立即上报诉求
+            </button>
+          </div>
         )}
       </div>
     </div>

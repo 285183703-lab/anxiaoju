@@ -17,14 +17,14 @@ export function MenuSheet() {
         <button
           type="button"
           aria-label="菜单"
-          className="p-1.5 -ml-2 text-[#1b1c1a] hover:bg-white/40 rounded-full transition-colors"
+          className="p-1.5 -ml-2 text-on-surface hover:bg-white/40 rounded-full transition-colors"
         >
-          <span className="material-symbols-outlined text-[22px] text-[#1b1c1a]">menu</span>
+          <span className="material-symbols-outlined text-[22px] text-on-surface">menu</span>
         </button>
       </SheetTrigger>
       <SheetContent side="left" className="w-[85%] max-w-sm bg-[#faf9f5] p-0">
         <SheetHeader className="bg-gradient-to-b from-[#d8e2ff]/30 to-[#faf9f5] px-6 pb-6 pt-8">
-          <SheetTitle className="text-xl font-bold text-[#1b1c1a] tracking-tight">安小居</SheetTitle>
+          <SheetTitle className="text-xl font-bold text-on-surface tracking-tight">安小居</SheetTitle>
           <p className="text-[13px] text-[#424754]/70 font-medium">
             越城区物业 AI 助手
           </p>
@@ -35,11 +35,11 @@ export function MenuSheet() {
               key={it.label}
               className="flex items-center gap-4 px-6 py-4 text-left transition-all hover:bg-[#efeeea]/50 active:scale-[0.99]"
             >
-              <span className="flex size-11 items-center justify-center rounded-xl bg-[#3d8bff]/10 text-[#3d8bff]">
+              <span className="flex size-11 items-center justify-center rounded-xl bg-[#3d8bff]/10 text-primary">
                 <it.icon className="size-5" />
               </span>
               <span className="flex flex-col">
-                <span className="text-[15px] font-semibold text-[#1b1c1a]">{it.label}</span>
+                <span className="text-[15px] font-semibold text-on-surface">{it.label}</span>
                 <span className="text-[12px] text-[#424754]/60">{it.desc}</span>
               </span>
             </button>

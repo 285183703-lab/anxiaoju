@@ -48,11 +48,11 @@ export function GuideDialog() {
           </span>
         </button>
       </DialogTrigger>
-      <DialogContent showCloseButton={false} className="max-w-sm gap-0 overflow-hidden rounded-[1.5rem] border-none p-0">
+      <DialogContent showCloseButton={false} className="max-w-sm gap-0 overflow-hidden rounded-md border-none p-0">
         <DialogHeader className="space-y-2 bg-gradient-to-br from-[#d8e2ff]/40 via-[#faf9f5] to-[#b6ccff]/30 px-6 pb-5 pt-7 text-left">
           <div className="flex items-center justify-between">
             <div>
-              <DialogTitle className="text-[20px] font-bold text-[#1b1c1a] tracking-tight">使用指引</DialogTitle>
+              <DialogTitle className="text-[20px] font-bold text-on-surface tracking-tight">使用指引</DialogTitle>
               <p className="text-[13px] text-[#424754]/70 font-medium mt-1">
                 四步用好安小居，物业的事都能办
               </p>
@@ -69,7 +69,7 @@ export function GuideDialog() {
                 {g.step}
               </span>
               <div className="flex flex-col gap-0.5">
-                <span className="text-[15px] font-bold text-[#1b1c1a]">{g.title}</span>
+                <span className="text-[15px] font-bold text-on-surface">{g.title}</span>
                 <span className="text-[13px] leading-relaxed text-[#424754]/70 font-medium">{g.desc}</span>
               </div>
             </li>

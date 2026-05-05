@@ -58,7 +58,7 @@ export function ChatInput({ onSend, disabled }: Props) {
               onClick={submit}
               className="w-12 h-12 rounded-full bg-[#3d8bff] text-white flex items-center justify-center shadow-lg shadow-[#3d8bff]/25 hover:brightness-110 active:scale-90 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              <span className="material-symbols-outlined text-[24px] text-white">arrow_upward</span>
+              <span className="material-symbols-outlined text-[24px] text-white">send</span>
             </button>
           </div>
         </div>

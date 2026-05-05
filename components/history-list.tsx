@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { getSessions, deleteSession, type ChatSession } from "@/lib/chat-history"
 import { History, Trash2, ChevronRight } from "lucide-react"
+import { SheetTitle } from "@/components/ui/sheet"
 
 type Props = {
   onSelectSession: (session: ChatSession) => void
@@ -39,7 +40,9 @@ export function HistoryList({ onSelectSession, onClose }: Props) {
       <div className="flex items-center justify-between px-4 py-4 border-b border-[#e3e2df]">
         <div className="flex items-center gap-2">
           <History className="size-5 text-[#424754]" />
-          <h2 className="text-[17px] font-bold text-[#1b1c1a]">历史会话</h2>
+          <SheetTitle asChild>
+            <h2 className="text-[17px] font-bold text-[#1b1c1a]">历史会话</h2>
+          </SheetTitle>
         </div>
         <button
           onClick={onClose}
@@ -59,12 +62,21 @@ export function HistoryList({ onSelectSession, onClose }: Props) {
           <ul className="divide-y divide-[#e3e2df]/50">
             {sessions.map((session) => (
               <li key={session.id}>
-                <button
+                <div
+                  role="button"
+                  tabIndex={0}
                   onClick={() => {
                     onSelectSession(session)
                     onClose()
                   }}
-                  className="w-full flex items-center gap-3 px-4 py-4 hover:bg-[#f4f4f0]/50 transition-colors text-left"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault()
+                      onSelectSession(session)
+                      onClose()
+                    }
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-4 hover:bg-[#f4f4f0]/50 transition-colors text-left cursor-pointer"
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline gap-2">
@@ -88,7 +100,7 @@ export function HistoryList({ onSelectSession, onClose }: Props) {
                     </button>
                     <ChevronRight className="size-5 text-[#424754]/30" />
                   </div>
-                </button>
+                </div>
               </li>
             ))}
           </ul>

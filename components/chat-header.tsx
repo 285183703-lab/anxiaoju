@@ -7,9 +7,10 @@ import type { ChatSession } from "@/lib/chat-history"
 
 type Props = {
   onSelectHistory?: (session: ChatSession) => void
+  onNewChat?: () => void
 }
 
-export function ChatHeader({ onSelectHistory }: Props) {
+export function ChatHeader({ onSelectHistory, onNewChat }: Props) {
   const [showHistory, setShowHistory] = useState(false)
 
   return (
@@ -40,8 +41,11 @@ export function ChatHeader({ onSelectHistory }: Props) {
             {/* <button className="p-2 rounded-full hover:bg-white/40 text-[#424754] transition-colors">
               <span className="material-symbols-outlined text-[20px] text-[#424754]">volume_up</span>
             </button> */}
-            <button className="p-2 rounded-full hover:bg-white/40 text-[#424754] transition-colors">
-              <span className="material-symbols-outlined text-[20px] text-[#424754]">more_horiz</span>
+            <button
+              onClick={onNewChat}
+              className="p-2 rounded-full hover:bg-white/40 text-[#424754] transition-colors"
+            >
+              <span className="material-symbols-outlined text-[20px] text-[#424754]">add_comment</span>
             </button>
           </div>
         </div>

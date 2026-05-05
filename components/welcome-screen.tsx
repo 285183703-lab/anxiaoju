@@ -22,6 +22,15 @@ export function WelcomeScreen({ onPickQuestion }: Props) {
   const [seed, setSeed] = useState(0)
   const [showReportForm, setShowReportForm] = useState(false)
 
+  const greeting = useMemo(() => {
+    const hour = new Date().getHours()
+    if (hour >= 5 && hour < 12) return "上午好，很高兴为您服务"
+    if (hour >= 12 && hour < 14) return "中午好，很高兴为您服务"
+    if (hour >= 14 && hour < 18) return "下午好，很高兴为您服务"
+    if (hour >= 18 && hour < 21) return "傍晚好，很高兴为您服务"
+    return "晚上好，很高兴为您服务"
+  }, [])
+
   const questions = useMemo(() => {
     const list = [...SUGGESTED_QUESTIONS]
     const offset = seed % list.length
@@ -59,7 +68,7 @@ export function WelcomeScreen({ onPickQuestion }: Props) {
           </span> */}
         </div>
         <h2 className="text-xl font-extrabold text-on-surface mb-1 tracking-tight">
-          上午好，很高兴为您服务
+          {greeting}
         </h2>
         <p className="text-[14px] leading-relaxed text-[#424754]/70 max-w-[90%] font-medium">
           我是您的物业管家安小居，有什么可以帮您？

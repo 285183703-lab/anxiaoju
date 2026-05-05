@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import {
   Dialog,
   DialogContent,
@@ -33,21 +34,38 @@ const guides = [
 ]
 
 export function GuideDialog() {
+  const [hidden, setHidden] = useState(false)
+
+  if (hidden) return null
+
   return (
     <Dialog>
-      <DialogTrigger asChild>
+      <div className="absolute right-4 top-4">
+        <DialogTrigger asChild>
+          <button
+            type="button"
+            aria-label="用户指引"
+            className="z-50 flex size-14 items-center justify-center rounded-full bg-[#3d8bff] text-white shadow-lg shadow-[#3d8bff]/30 transition-all hover:brightness-110 active:scale-95"
+          >
+            <span className="text-[11px] font-bold leading-tight tracking-tight">
+              使用
+              <br />
+              指引
+            </span>
+          </button>
+        </DialogTrigger>
         <button
           type="button"
-          aria-label="用户指引"
-          className="absolute right-4 top-4 flex size-14 items-center justify-center rounded-full bg-[#3d8bff] text-white shadow-lg shadow-[#3d8bff]/30 transition-all hover:brightness-110 active:scale-95"
+          aria-label="隐藏指引"
+          onClick={(e) => {
+            e.stopPropagation()
+            setHidden(true)
+          }}
+          className="z-[60] absolute -top-2 -left-1 flex size-4 items-center justify-center rounded-full bg-black/40 text-[9px] leading-none text-white shadow transition-all hover:bg-black/60 active:scale-110"
         >
-          <span className="text-[11px] font-bold leading-tight tracking-tight">
-            使用
-            <br />
-            指引
-          </span>
+          ✕
         </button>
-      </DialogTrigger>
+      </div>
       <DialogContent showCloseButton={false} className="max-w-sm gap-0 overflow-hidden rounded-md border-none p-0">
         <DialogHeader className="space-y-2 bg-gradient-to-br from-[#d8e2ff]/40 via-[#faf9f5] to-[#b6ccff]/30 px-6 pb-5 pt-7 text-left">
           <div className="flex items-center justify-between">

@@ -10,7 +10,7 @@ const publicSans = Public_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "安小居 - 越城区物业诉求 AI 助手",
+  title: "安小居",
   description:
     "安小居是绍兴市越城区「码上安居」平台 AI 助手，提供物业投诉、建议、咨询等智能受理服务。",
   generator: "v0.app",

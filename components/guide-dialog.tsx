@@ -4,8 +4,6 @@ import { useState } from "react"
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog"
@@ -45,7 +43,7 @@ export function GuideDialog() {
           <button
             type="button"
             aria-label="用户指引"
-            className="z-50 flex size-14 items-center justify-center rounded-full bg-[#3d8bff] text-white shadow-lg shadow-[#3d8bff]/30 transition-all hover:brightness-110 active:scale-95"
+            className="flex size-14 items-center justify-center rounded-full bg-[#3d8bff] text-white shadow-lg shadow-[#3d8bff]/30 transition-all hover:brightness-110 active:scale-95"
           >
             <span className="text-[11px] font-bold leading-tight tracking-tight">
               使用
@@ -61,16 +59,16 @@ export function GuideDialog() {
             e.stopPropagation()
             setHidden(true)
           }}
-          className="z-[60] absolute -top-2 -left-1 flex size-4 items-center justify-center rounded-full bg-black/40 text-[9px] leading-none text-white shadow transition-all hover:bg-black/60 active:scale-110"
+          className="absolute -top-2 -left-1 flex size-4 items-center justify-center rounded-full bg-black/40 text-[9px] leading-none text-white shadow transition-all hover:bg-black/60 active:scale-110"
         >
           ✕
         </button>
       </div>
-      <DialogContent showCloseButton={false} className="max-w-sm gap-0 overflow-hidden rounded-md border-none p-0">
-        <DialogHeader className="space-y-2 bg-gradient-to-br from-[#d8e2ff]/40 via-[#faf9f5] to-[#b6ccff]/30 px-6 pb-5 pt-7 text-left">
+      <DialogContent showCloseButton={false} title="使用指引" className="max-w-sm gap-0 overflow-hidden rounded-md border-none p-0">
+        <div className="space-y-2 bg-gradient-to-br from-[#d8e2ff]/40 via-[#faf9f5] to-[#b6ccff]/30 px-6 pb-5 pt-7 text-left">
           <div className="flex items-center justify-between">
             <div>
-              <DialogTitle className="text-[20px] font-bold text-on-surface tracking-tight">使用指引</DialogTitle>
+              <span className="text-[20px] font-bold text-on-surface tracking-tight">使用指引</span>
               <p className="text-[13px] text-[#424754]/70 font-medium mt-1">
                 四步用好安小居，物业的事都能办
               </p>
@@ -79,7 +77,7 @@ export function GuideDialog() {
               <span className="material-symbols-outlined text-[18px] text-[#424754]">close</span>
             </DialogClose>
           </div>
-        </DialogHeader>
+        </div>
         <ul className="flex flex-col gap-3 px-6 py-5">
           {guides.map((g) => (
             <li key={g.step} className="flex gap-3 rounded-xl bg-[#efeeea]/50 p-4">

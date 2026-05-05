@@ -8,9 +8,6 @@ import { cn } from '@/lib/utils'
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
 } from '@/components/ui/dialog'
 
 function Command({
@@ -44,11 +41,8 @@ function CommandDialog({
 }) {
   return (
     <Dialog {...props}>
-      <DialogHeader className="sr-only">
-        <DialogTitle>{title}</DialogTitle>
-        <DialogDescription>{description}</DialogDescription>
-      </DialogHeader>
       <DialogContent
+        title={title}
         className={cn('overflow-hidden p-0', className)}
         showCloseButton={showCloseButton}
       >

@@ -1,16 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { ChatHeader } from "@/components/chat-header"
 import { WelcomeScreen } from "@/components/welcome-screen"
 import { MessageList } from "@/components/message-list"
 import { ChatInput } from "@/components/chat-input"
 import { ReportForm } from "@/components/report-form"
+import { saveSession, updateSession, type ChatSession } from "@/lib/chat-history"
 import type { AssistantPayload, ChatMessage } from "@/lib/chat-types"
 
 export default function Page() {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [pending, setPending] = useState(false)
+  const [currentSessionId, setCurrentSessionId] = useState<string | null>(null)
   const [reportReady, setReportReady] = useState<{
     category: string
     description: string
@@ -19,6 +21,7 @@ export default function Page() {
   } | null>(null)
 
   const hasChat = messages.length > 0
+  const lastSaveRef = useRef<string>("")
 
   async function send(text: string) {
     if (!text.trim() || pending) return
@@ -59,7 +62,8 @@ export default function Page() {
             }
           : undefined,
       }
-      setMessages((m) => [...m, aiMsg])
+      const finalMessages = [...next, aiMsg]
+      setMessages(finalMessages)
 
       if (data.report_ready && data.collected.description) {
         setReportReady({
@@ -85,6 +89,21 @@ export default function Page() {
     }
   }
 
+  useEffect(() => {
+    if (messages.length > 0 && !pending) {
+      const msgStr = JSON.stringify(messages)
+      if (msgStr !== lastSaveRef.current) {
+        lastSaveRef.current = msgStr
+        if (currentSessionId) {
+          updateSession(currentSessionId, messages)
+        } else {
+          const session = saveSession(messages)
+          setCurrentSessionId(session.id)
+        }
+      }
+    }
+  }, [messages, pending, currentSessionId])
+
   function handleReportSubmit(url: string) {
     window.location.href = url
   }
@@ -97,6 +116,8 @@ export default function Page() {
     if (pending) return
     setMessages([])
     setReportReady(null)
+    setCurrentSessionId(null)
+    lastSaveRef.current = ""
   }
 
   function handleReportClick(msg: ChatMessage) {
@@ -110,12 +131,17 @@ export default function Page() {
     }
   }
 
+  function handleSelectHistory(session: ChatSession) {
+    setMessages(session.messages)
+    setCurrentSessionId(session.id)
+    lastSaveRef.current = JSON.stringify(session.messages)
+  }
+
   return (
     <main className="mx-auto w-full max-w-2xl min-h-dvh flex flex-col">
-      <ChatHeader onReset={reset} />
+      <ChatHeader onSelectHistory={handleSelectHistory} />
 
-      {/* <div className={`flex-1  scrollbar-hidden ${hasChat ? "pt-4" : "pt-16"}`}> */}
-       <div className="flex-1  scrollbar-hidden  pt-24">
+      <div className="flex-1 scrollbar-hidden pt-24">
         {hasChat ? (
           <MessageList messages={messages} pending={pending} onReportClick={handleReportClick} />
         ) : (

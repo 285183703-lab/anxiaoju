@@ -37,8 +37,7 @@ export function WelcomeScreen({ onPickQuestion }: Props) {
 
   return (
     <div className="flex flex-col relative">
-      {/* User Guide Button */}
-      <GuideDialog />
+
 
       {/* Character Display Area */}
       <div className="flex flex-col items-center mb-4 text-center relative px-4">
@@ -62,7 +61,8 @@ export function WelcomeScreen({ onPickQuestion }: Props) {
           我是您的物业管家安小居，有什么可以帮您？
         </p>
       </div>
-
+      {/* User Guide Button */}
+      <GuideDialog />
       {/* Suggested Questions */}
       <section className="space-y-2 px-4">
         <div className="flex items-center justify-between px-1">

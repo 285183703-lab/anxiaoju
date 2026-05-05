@@ -154,3 +154,27 @@
 .animate-bounce-slow {
   animation: bounce-slow 2s ease-in-out infinite;
 }
+
+@keyframes swirl {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(15deg);
+  }
+  100% {
+    transform: scale(1) rotate(-5deg);
+  }
+}
+
+@keyframes blink {
+  0%,
+  92%,
+  98%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.05);
+  }
+}

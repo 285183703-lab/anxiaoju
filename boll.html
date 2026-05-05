@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>完美复刻 - 星云能量球 (长眼微调版)</title>
+  <style>
+    :root {
+      --sphere-size: 280px;
+      --eye-width: 22px;
+      /* 调整 1：将眼睛高度拉长 */
+      --eye-height: 75px; 
+      --eye-gap: 45px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #d8daeb; 
+    }
+
+    /* 能量球主容器 */
+    .sphere-container {
+      width: var(--sphere-size);
+      height: var(--sphere-size);
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      background-color: #e4e7fd;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    /* 内部星云气体层 */
+    .nebula-clouds {
+      position: absolute;
+      top: -10%; left: -10%;
+      width: 120%; height: 120%;
+      filter: blur(25px);
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.9) 0%, transparent 40%),
+        radial-gradient(circle at 45% 40%, rgba(131, 56, 255, 0.8) 0%, transparent 55%),
+        radial-gradient(circle at 75% 65%, rgba(220, 120, 255, 0.7) 0%, transparent 55%),
+        radial-gradient(circle at 30% 70%, rgba(120, 160, 255, 0.7) 0%, transparent 50%),
+        radial-gradient(circle at 60% 20%, rgba(100, 100, 255, 0.5) 0%, transparent 40%);
+      animation: swirl 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes swirl {
+      0% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.1) rotate(15deg); }
+      100% { transform: scale(1) rotate(-5deg); }
+    }
+
+    /* 边缘光晕层 */
+    .glass-rim {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      pointer-events: none; 
+      box-shadow: 
+        inset 0 0 15px 8px rgba(255, 255, 255, 0.9),
+        inset 0 0 40px 15px rgba(255, 255, 255, 0.6);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      box-sizing: border-box;
+    }
+
+    /* 眼睛容器 */
+    .eyes-container {
+      position: absolute;
+      /* 调整 2：将默认居中的 50% 改为 43%，使其整体位置上移 */
+      top: 43%; 
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      gap: var(--eye-gap);
+      z-index: 10; 
+    }
+
+    /* 眼睛样式 */
+    .eye {
+      width: var(--eye-width);
+      height: var(--eye-height);
+      background-color: #ffffff;
+      border-radius: calc(var(--eye-width) / 2);
+      box-shadow: 0 0 12px 1px rgba(255, 255, 255, 0.9);
+      
+      transform-origin: center;
+      animation: blink 4.5s infinite;
+    }
+
+    /* 眨眼动画逻辑 */
+    @keyframes blink {
+      0%, 92%, 98%, 100% {
+        transform: scaleY(1);
+      }
+      95% {
+        transform: scaleY(0.05); 
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sphere-container">
+    <div class="nebula-clouds"></div>
+    <div class="glass-rim"></div>
+    <div class="eyes-container">
+      <div class="eye line-1"></div>
+      <div class="eye line-2"></div>
+    </div>
+  </div>
+
+  <script>
+    const eyesContainer = document.querySelector('.eyes-container');
+
+    function animate(time) {
+      const t = time * 0.001; 
+      // 极其细微的中心点原位浮动
+      const floatX = Math.sin(t * 1.5) * 2; 
+      const floatY = Math.cos(t * 1.0) * 4; 
+      
+      eyesContainer.style.transform = `translate(-50%, -50%) translate(${floatX}px, ${floatY}px)`;
+      
+      requestAnimationFrame(animate); 
+    }
+
+    requestAnimationFrame(animate);
+  </script>
+</body>
+</html>

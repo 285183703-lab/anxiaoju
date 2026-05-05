@@ -1,10 +1,10 @@
 "use client"
 
-import Image from "next/image"
 import { SUGGESTED_QUESTIONS } from "@/lib/chat-types"
 import { useMemo, useState } from "react"
 import { GuideDialog } from "@/components/guide-dialog"
 import { ReportForm } from "@/components/report-form"
+import { EnergyBall } from "@/components/energy-ball"
 
 type Props = {
   onPickQuestion: (q: string) => void
@@ -52,20 +52,9 @@ export function WelcomeScreen({ onPickQuestion }: Props) {
       <div className="flex flex-col items-center mb-4 text-center relative px-4">
         {/* <div className="absolute inset-0 persona-glow -z-10 scale-150 blur-3xl opacity-50"></div> */}
         <div className="relative mb-4 group">
-          <div className="w-32 h-32 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center overflow-hidden shadow-premium border border-white/60">
-            <Image
-              src="/mascot.png"
-              alt="安小居"
-              width={160}
-              height={160}
-              priority
-              className="size-full object-contain rounded-full drop-shadow-2xl"
-            />
+          <div className="w-32 h-32 rounded-full   flex items-center justify-center overflow-hidden">
+            <EnergyBall size={128} />
           </div>
-          {/* 在线状态指示 */}
-          {/* <span className="absolute -bottom-1 -right-1 size-3 rounded-full border-3 border-white bg-[#34c759] animate-pulse-dot flex items-center justify-center shadow-lg">
-            
-          </span> */}
         </div>
         <h2 className="text-xl font-extrabold text-on-surface mb-1 tracking-tight">
           {greeting}

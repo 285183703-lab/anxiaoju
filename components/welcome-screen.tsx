@@ -41,9 +41,9 @@ export function WelcomeScreen({ onPickQuestion }: Props) {
 
       {/* Character Display Area */}
       <div className="flex flex-col items-center mb-4 text-center relative px-4">
-        <div className="absolute inset-0 persona-glow -z-10 scale-150 blur-3xl opacity-50"></div>
+        {/* <div className="absolute inset-0 persona-glow -z-10 scale-150 blur-3xl opacity-50"></div> */}
         <div className="relative mb-4 group">
-          <div className="w-32 h-32 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center relative overflow-hidden shadow-premium border border-white/60">
+          <div className="w-32 h-32 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center overflow-hidden shadow-premium border border-white/60">
             <Image
               src="/mascot.png"
               alt="安小居"
@@ -53,6 +53,10 @@ export function WelcomeScreen({ onPickQuestion }: Props) {
               className="size-full object-contain rounded-full drop-shadow-2xl"
             />
           </div>
+          {/* 在线状态指示 */}
+          {/* <span className="absolute -bottom-1 -right-1 size-3 rounded-full border-3 border-white bg-[#34c759] animate-pulse-dot flex items-center justify-center shadow-lg">
+            
+          </span> */}
         </div>
         <h2 className="text-xl font-extrabold text-on-surface mb-1 tracking-tight">
           上午好，很高兴为您服务
@@ -64,7 +68,7 @@ export function WelcomeScreen({ onPickQuestion }: Props) {
       {/* User Guide Button */}
       <GuideDialog />
       {/* Suggested Questions */}
-      <section className="space-y-2 px-4">
+      <section className="mt-6 space-y-2 px-4">
         <div className="flex items-center justify-between px-1">
           <h3 className="text-[12px] font-bold text-on-surface/80 flex items-center gap-2 uppercase tracking-widest">
             <span className="material-symbols-outlined text-[16px] text-primary">auto_awesome</span>

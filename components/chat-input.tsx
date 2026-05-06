@@ -29,7 +29,7 @@ export function ChatInput({ onSend, disabled }: Props) {
     <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl z-50">
       <div className="max-w-2xl mx-auto px-6 pb-4">
         {/* Quick Actions */}
-        <div className="flex items-center gap-2.5 overflow-x-auto no-scrollbar pb-3">
+        {/* <div className="flex items-center gap-2.5 overflow-x-auto no-scrollbar pb-3">
           <button className="whitespace-nowrap px-5 py-2.5 rounded-full glass-card bg-white/70 border-white/60 text-[13px] font-bold  flex items-center gap-2 flex-0.33 justify-center active:scale-95 transition-transform inner-glow">
             <span className="material-symbols-outlined text-[18px] text-on-surface">edit_square</span>诉求上报
           </button>
@@ -37,7 +37,7 @@ export function ChatInput({ onSend, disabled }: Props) {
             <span className="material-symbols-outlined text-[18px] text-on-surface">manage_search</span>诉求查询
           </button>
   
-        </div>
+        </div> */}
 
         {/* Capsule Input Area */}
         <div className="relative mb-2">

@@ -47,7 +47,7 @@ export function EnergyBall({ size = 160 }: { size?: number }) {
             radial-gradient(circle at 30% 70%, rgba(120, 160, 255, 0.7) 0%, transparent 50%),
             radial-gradient(circle at 60% 20%, rgba(100, 100, 255, 0.5) 0%, transparent 40%)
           `,
-          animation: "swirl 20s ease-in-out infinite alternate",
+          animation: "swirl 10s ease-in-out infinite alternate",
           borderRadius: "50%",
         }}
       />
@@ -62,8 +62,8 @@ export function EnergyBall({ size = 160 }: { size?: number }) {
           borderRadius: "50%",
           pointerEvents: "none",
           boxShadow: `
-            inset 0 0 15px 8px rgba(255, 255, 255, 0.9),
-            inset 0 0 40px 15px rgba(255, 255, 255, 0.6)
+            inset 0 0 15px 8px rgba(255, 255, 255, 0.7),
+            inset 0 0 40px 15px rgba(255, 255, 255, 0.7)
           `,
           boxSizing: "border-box",
         }}
@@ -85,7 +85,7 @@ export function EnergyBall({ size = 160 }: { size?: number }) {
             style={{
               width: size * 0.08,
               height: size * 0.26,
-              backgroundColor: "#ffffff",
+              backgroundColor: "rgba(255, 255, 255, 0.9)",
               borderRadius: `${size * 0.04}px`,
               boxShadow: "0 0 12px 1px rgba(255, 255, 255, 0.9)",
               animation: "blink 4.5s infinite",

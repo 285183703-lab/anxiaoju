@@ -138,7 +138,7 @@ export default function Page() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-2xl min-h-dvh flex flex-col">
+    <main className="mx-auto w-full max-w-2xl min-h-dvh flex flex-col pb-48">
       <ChatHeader onSelectHistory={handleSelectHistory} onNewChat={reset} />
 
       <div className="flex-1 scrollbar-hidden pt-24">
